@@ -1,0 +1,29 @@
+# Secrets. Never commit these.
+.env
+.env.local
+*.env
+!.env.example
+
+# Account database: real people's email addresses and password hashes.
+*.db
+*.sqlite
+*.sqlite3
+geo4irr_auth.db
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Scratch
+/tmp/
+*.log

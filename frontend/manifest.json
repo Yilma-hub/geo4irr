@@ -1,0 +1,46 @@
+{
+  "name": "Geo4Irr — Delaware irrigation",
+  "short_name": "Geo4Irr",
+  "description": "Irrigation and nitrogen decisions for Delaware cropland, on DEOS weather, SSURGO soils and Sentinel imagery.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#00284D",
+  "theme_color": "#00539F",
+  "categories": ["productivity", "utilities"],
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Pick a field",
+      "short_name": "Map",
+      "description": "Open the map and choose a field",
+      "url": "./index.html"
+    }
+  ]
+}

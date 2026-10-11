@@ -1,0 +1,39 @@
+# Local development stack. Production runs the same images behind a load
+# balancer with managed Postgres; see README for the deployment notes.
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: geo4irr
+      POSTGRES_USER: geo4irr
+      POSTGRES_PASSWORD: change-me-before-anything-real
+    ports: ["5432:5432"]
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./infra/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U geo4irr"]
+      interval: 5s
+      retries: 10
+
+  api:
+    build: ./backend
+    environment:
+      DATABASE_URL: postgresql+psycopg://geo4irr:change-me-before-anything-real@db:5432/geo4irr
+      GEO4IRR_FRONTEND: /srv/frontend
+      GEO4IRR_ORIGINS: "http://localhost:8000,http://localhost:5173"
+      # Free Copernicus Data Space credentials for Sentinel imagery. Register at
+      # dataspace.copernicus.eu, create an OAuth client under User Settings, then
+      # export these in your shell or put them in a .env file beside this one.
+      # Without them everything else still runs; the satellite screen explains
+      # how to switch it on.
+      CDSE_CLIENT_ID: "${CDSE_CLIENT_ID:-}"
+      CDSE_CLIENT_SECRET: "${CDSE_CLIENT_SECRET:-}"
+    volumes:
+      - ./frontend:/srv/frontend:ro
+    ports: ["8000:8000"]
+    depends_on:
+      db: {condition: service_healthy}
+
+volumes:
+  pgdata:

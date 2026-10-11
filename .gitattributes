@@ -1,0 +1,14 @@
+# Store text with LF in the repository, whatever the working copy uses.
+# Without this a Windows commit puts CRLF in every file and every later
+# diff on Linux or a Mac shows the whole file as changed.
+* text=auto eol=lf
+
+# Binary, never line-ending converted. The shapefile fixtures in samples/
+# are read byte for byte by the import tests and conversion corrupts them.
+*.zip binary
+*.shp binary
+*.dbf binary
+*.shx binary
+*.prj binary
+*.png binary
+*.ico binary

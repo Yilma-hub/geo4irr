@@ -1,0 +1,39 @@
+{
+ "type": "FeatureCollection",
+ "features": [
+  {
+   "type": "Feature",
+   "properties": {
+    "name": "iowa_field",
+    "grower": "Sample Farms"
+   },
+   "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+     [
+      [
+       -93.6,
+       41.6
+      ],
+      [
+       -93.5916287,
+       41.6
+      ],
+      [
+       -93.5916287,
+       41.6063042
+      ],
+      [
+       -93.6,
+       41.6063042
+      ],
+      [
+       -93.6,
+       41.6
+      ]
+     ]
+    ]
+   }
+  }
+ ]
+}

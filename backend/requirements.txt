@@ -1,0 +1,23 @@
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+pydantic==2.10.4
+httpx==0.28.1
+SQLAlchemy==2.0.36
+psycopg[binary]==3.2.3
+alembic==1.14.0
+python-dotenv==1.0.1
+# Required by FastAPI to accept multipart uploads (/api/ingest/shapefile).
+python-multipart==0.0.20
+apscheduler==3.11.0
+# FAO-56 reference implementation (Thorp 2022, USDA-ARS). Named in the project
+# narrative and used as the engine of record for the soil water balance; pulls
+# in pandas and numpy. The application still runs without it — see
+# GEO4IRR_ET_ENGINE in app/engine/pyfao56_bridge.py.
+#
+# From PyPI rather than GitHub on purpose: a git+https requirement needs Git
+# installed on the machine doing the install, which is one more thing to go
+# wrong on a Windows laptop for no benefit. This is the same package.
+pyfao56>=1.4.0
+
+pytest==8.3.4
+pytest-asyncio==0.25.0
