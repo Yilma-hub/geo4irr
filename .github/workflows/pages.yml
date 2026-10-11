@@ -1,0 +1,46 @@
+﻿# Publishes the browser application to GitHub Pages on every push to main.
+#
+# Only the frontend folder goes up, which is the whole application: one HTML
+# file, the Delaware irrigated-areas layer, the icons, the service worker. The
+# backend is not published and cannot be. GitHub Pages serves static files; it
+# does not run Python.
+#
+# Publishing from a workflow rather than pointing Pages at a branch folder is
+# deliberate. Pages can only serve a repository root or a docs folder, so the
+# alternative is moving frontend to docs or keeping a gh-pages branch with a
+# copy in it. Both let the published copy drift from the source. This way there
+# is one copy of every file and the site is rebuilt from it.
+name: Publish the app
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      - name: Package the frontend
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: frontend
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
